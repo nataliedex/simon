@@ -1,79 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Four</title>
-    <link rel="stylesheet" href="./styles.css">
+  <meta charset="utf-8">
+  <title>Simon</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 </head>
+
 <body>
+  <h1 id="level-title">Press A Key to Start</h1>
+  <div class="container">
+    <div lass="row">
 
-    <h1 class="title">Connect Four</h1>
-    <p>You are <a class="you">RED</a> and the computer is <a class="computer">YELLOW</a></p>
-    <p>Drop your piece in the top slot to start the game.  4 in a row Wins!</p>
+      <div type="button" id="green" class="btn green">
 
-    <div class="container">
+      </div>
 
-        <div class="header col1">&#8595</div>
-        <div class="header col2">&#8595</div>
-        <div class="header col3">&#8595</div>
-        <div class="header col4">&#8595</div>
-        <div class="header col5">&#8595</div>
-        <div class="header col6">&#8595</div>
-        <div class="header col7">&#8595</div>
+      <div type="button" id="red" class="btn red">
 
-        <div class="space col1 row6"></div>
-        <div class="space col2 row6"></div>
-        <div class="space col3 row6"></div>
-        <div class="space col4 row6"></div>
-        <div class="space col5 row6"></div>
-        <div class="space col6 row6"></div>
-        <div class="space col7 row6"></div>
+      </div>
+    </div>
 
-        <div class="space col1 row5"></div>
-        <div class="space col2 row5"></div>
-        <div class="space col3 row5"></div>
-        <div class="space col4 row5"></div>
-        <div class="space col5 row5"></div>
-        <div class="space col6 row5"></div>
-        <div class="space col7 row5"></div>
+    <div class="row">
 
-        <div class="space col1 row4"></div>
-        <div class="space col2 row4"></div>
-        <div class="space col3 row4"></div>
-        <div class="space col4 row4"></div>
-        <div class="space col5 row4"></div>
-        <div class="space col6 row4"></div>
-        <div class="space col7 row4"></div>
+      <div type="button" id="yellow" class="btn yellow">
 
-        <div class="space col1 row3"></div>
-        <div class="space col2 row3"></div>
-        <div class="space col3 row3"></div>
-        <div class="space col4 row3"></div>
-        <div class="space col5 row3"></div>
-        <div class="space col6 row3"></div>
-        <div class="space col7 row3"></div>
+      </div>
+      <div type="button" id="blue" class="btn blue">
 
-        <div class="space col1 row2"></div>
-        <div class="space col2 row2"></div>
-        <div class="space col3 row2"></div>
-        <div class="space col4 row2"></div>
-        <div class="space col5 row2"></div>
-        <div class="space col6 row2"></div>
-        <div class="space col7 row2"></div>
-
-        <div class="space col1 row1"></div>
-        <div class="space col2 row1"></div>
-        <div class="space col3 row1"></div>
-        <div class="space col4 row1"></div>
-        <div class="space col5 row1"></div>
-        <div class="space col6 row1"></div>
-        <div class="space col7 row1"></div>
-
+      </div>
 
     </div>
-        
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./index.js"></script>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="./index.js"></script>
 </body>
+
 </html>
