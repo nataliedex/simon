@@ -1,121 +1,199 @@
-var buttonColors = ["red", "blue", "yellow", "green"];
-var level = 0;
-var started = false;
-var gamePattern = [];
-var userClickedPattern = [];
+$(".header").click(function(event){
+    $(this).addClass("selected");
 
-$(document).on("keydown",function(event){
-    if(!started){
-        
-        $("h1").text("Level " + level);
-        nextSequence();
-        started = true;
-        // level = level + 1;
-    } 
-})
+    for(var i=1; i< 8; i++){
+        if($(this).hasClass(("col"+[i]))){
 
-$(".btn").click(function(){
-
-    var userChosenColor = this.id;
-    userClickedPattern.push(userChosenColor);
-    animateSquare(this.id);
-
-    console.log(userClickedPattern);
-
-    checkAnswer(userClickedPattern.length-1)
-})
-
-
-
-
-function nextSequence(){
-    userClickedPattern = [];
-    level = level + 1;
-    $("h1").text("Level " + level);
-
-    var randomChosenColour = buttonColors[Math.floor(Math.random()*4)];
-    gamePattern.push(randomChosenColour);
-    animateSquare(randomChosenColour);
-
-    console.log(gamePattern);  
-
-}
-
-
-
-
-
-
-function checkAnswer(currentLevel){
-    if(gamePattern[currentLevel]===userClickedPattern[currentLevel]){
-        console.log("success");
-        if (userClickedPattern.length === gamePattern.length){
-            setTimeout(function(){
-                nextSequence();
-                },1000);
+            for(var j = 1; j < 7; j++){
+                if($((".space.row"+[j]+".col"+[i])).hasClass("computerPiece")===false &&
+                $((".space.row"+[j]+".col"+[i])).hasClass("new")===false)  {
+                    $((".space.row"+[j]+".col"+[i])).addClass("new");
+                    j=7;
+                    $(this).removeClass("selected");  
+                    endGame();
+                }
+            }   
+        }
     }
-    } else {
-        console.log("wrong");
 
-        var wrong = new Audio("./assets/wrong.mp3");
-        wrong.play();
-
-        $("body").addClass("game-over");
-        setTimeout(function(){
-            $("body").removeClass("game-over");
-            },200);
-        
-        $("h1").text("Game Over, Press Any Key to Restart");
-        
-        startOver();
-    } 
- 
-}
-
-function startOver(){
-    level = 0;
-    gamePattern = [];
-    userClickedPattern = [];
-    started = false;
-
-}
-    
+    setTimeout(computerTurn, 500);
+});   
 
 
+function computerTurn(){
 
+    var open = true;
+    while(open === true){
 
-function animateSquare(key){
-    
-    switch (key) {
-        
-        case "blue":
-            var blueButton = new Audio("./assets/blue.mp3");
-            blueButton.play();
-            $(".blue").fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
-
-        case "red":
-            var redButton = new Audio("./assets/red.mp3");
-            redButton.play();
-            $(".red").fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
-
-        case "yellow":
-            var yellowButton = new Audio("./assets/yellow.mp3");
-            yellowButton.play();
-            $(".yellow").fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
-
-        case "green":
-            var greenButton = new Audio("./assets/green.mp3");
-            greenButton.play();
-            $(".green").fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
-    
-        default:
-            console.log("error");
-            break;
+        var computerColumn = Math.floor(Math.random()*7)+1;
+        console.log(computerColumn);
+        for(var j = 1; j < 7; j++){
+            console.log(j);
+            if($((".space.row"+[j]+".col"+[computerColumn])).hasClass("computerPiece")===false &&
+            $((".space.row"+[j]+".col"+[computerColumn])).hasClass("new")===false) {
+                $((".space.row"+[j]+".col"+[computerColumn])).addClass("computerPiece");
+                open = false;
+                j = 7;
+                endGame();
+                
+            }  
+        }
     }
 }
+
+function endGame(){
+    //horizontal win
+
+    //you win
+    for(var i = 1; i < 7; i++){
+        for(var j = 1; j < 5; j++){
+            if($((".space.row"+i+".col"+j)).hasClass("new") &&
+            $((".space.row"+i+".col"+(j+1))).hasClass("new") &&
+            $((".space.row"+i+".col"+(j+2))).hasClass("new") &&
+            $((".space.row"+i+".col"+(j+3))).hasClass("new")){
+                $("h1").addClass("end");
+                $("h1").text("You Win!"); 
+                console.log("horizontal win") ;
+                reloadWindow(); 
+            }
+
+        }
+    }
+    //computer wins
+    for(var i = 1; i < 7; i++){
+        for(var j = 1; j < 5; j++){
+            if($((".space.row"+i+".col"+j)).hasClass("computerPiece") &&
+            $((".space.row"+i+".col"+(j+1))).hasClass("computerPiece") &&
+            $((".space.row"+i+".col"+(j+2))).hasClass("computerPiece") &&
+            $((".space.row"+i+".col"+(j+3))).hasClass("computerPiece")){
+                $("h1").addClass("end");
+                $("h1").text("Computer Wins!");
+                console.log("horizontal win");
+                reloadWindow();   
+            }
+
+        }
+    }
+    //vertical win
+    //you win
+    for(var i = 1; i < 4; i++){
+        for(var j = 1; j < 8; j++){
+            if($((".space.row"+i+".col"+j)).hasClass("new") &&
+            $((".space.row"+(i+1)+".col"+j)).hasClass("new") &&
+            $((".space.row"+(i+2)+".col"+j)).hasClass("new") &&
+            $((".space.row"+(i+3)+".col"+j)).hasClass("new")){
+                $("h1").addClass("end");
+                $("h1").text("You Win!"); 
+                console.log("vertical win");
+                reloadWindow();   
+            }
+
+        }
+    }
+    //computer wins
+    for(var i = 1; i < 4; i++){
+        for(var j = 1; j < 8; j++){
+            if($((".space.row"+i+".col"+j)).hasClass("computerPiece") &&
+            $((".space.row"+(i+1)+".col"+j)).hasClass("computerPiece") &&
+            $((".space.row"+(i+2)+".col"+j)).hasClass("computerPiece") &&
+            $((".space.row"+(i+3)+".col"+j)).hasClass("computerPiece")){
+                $("h1").addClass("end");
+                $("h1").text("Computer Wins!");
+                console.log("vertical win");
+                reloadWindow();   
+            }
+
+        }
+    }
+
+
+    //forward slash win
+    //you win
+    for(var i = 1; i < 8; i++){
+        for(var j = 1; j < 7; j++){
+            if($((".space.row"+i+".col"+j)).hasClass("new") &&
+            $((".space.row"+(i+1)+".col"+(j+1))).hasClass("new") &&
+            $((".space.row"+(i+2)+".col"+(j+2))).hasClass("new") &&
+            $((".space.row"+(i+3)+".col"+(j+3))).hasClass("new")){
+                $("h1").addClass("end");
+                $("h1").text("You Win!"); 
+                console.log("forward slash win") ;
+                reloadWindow(); 
+            }
+
+        }
+    }
+    //computer wins
+    for(var i = 1; i < 8; i++){
+        for(var j = 1; j < 7; j++){
+            if($((".space.row"+i+".col"+j)).hasClass("computerPiece") &&
+            $((".space.row"+(i+1)+".col"+(j+1))).hasClass("computerPiece") &&
+            $((".space.row"+(i+2)+".col"+(j+2))).hasClass("computerPiece") &&
+            $((".space.row"+(i+3)+".col"+(j+3))).hasClass("computerPiece")){
+                $("h1").addClass("end");
+                $("h1").text("Computer Wins!");
+                console.log("forward slash win");
+                reloadWindow();   
+            }
+
+        }
+    }
+
+    //backward slash win
+    //you win
+    for(var i = 8; i > 0; i--){
+        for(var j = 1; j < 7; j++){
+            if($((".space.row"+i+".col"+j)).hasClass("new") &&
+            $((".space.row"+(i-1)+".col"+(j+1))).hasClass("new") &&
+            $((".space.row"+(i-2)+".col"+(j+2))).hasClass("new") &&
+            $((".space.row"+(i-3)+".col"+(j+3))).hasClass("new")){
+                $("h1").addClass("end");
+                $("h1").text("You Win!"); 
+                console.log("backward slash win") ;
+                reloadWindow(); 
+            }
+
+        }
+    }
+    //computer wins
+    for(var i = 8; i > 0; i--){
+        for(var j = 1; j < 7; j++){
+            if($((".space.row"+i+".col"+j)).hasClass("computerPiece") &&
+            $((".space.row"+(i-1)+".col"+(j+1))).hasClass("computerPiece") &&
+            $((".space.row"+(i-2)+".col"+(j+2))).hasClass("computerPiece") &&
+            $((".space.row"+(i-3)+".col"+(j+3))).hasClass("computerPiece")){
+                $("h1").addClass("end");
+                $("h1").text("You Win!"); 
+                console.log("backward slash win") ;
+                reloadWindow(); 
+            }
+
+        }
+    }
+
+}
+
+function reloadWindow(){
+    setTimeout(function() {
+        window.location.reload();
+     }, 5000);
+}
+
+
+    
+
+
+
+
+    
+    
+  
+        
+    
+
+
+
+
+
 
 

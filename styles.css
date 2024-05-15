@@ -1,53 +1,78 @@
-body {
-  text-align: center;
-  background-color: #011F3F;
-}
-
-#level-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 3rem;
-  margin:  5%;
-  color: #FEF2BF;
-}
-
 .container {
-  display: block;
-  width: 50%;
-  margin: auto;
+    height: 80vh;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 30px 30px 30px 30px 30px 30px 30px;
+    grid-template-rows: 30px 30px 30px 30px 30px 30px 30px; 
+    border-color: black;
+    grid-gap: 5%;
+}
+
+.space {
+    background-color: white;
+    border: 1px dashed black;
+    border-radius: 50%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.header {
+    background-color: white;
+    border: 1px solid black;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.selected {
+    background-color: blue;
+}
+
+.new {
+    background-color: red;
+}
+
+.computerPiece {
+    background-color: yellow;
+}
+
+
+body {
+    background-color: #393E46;
+  }
+
+h1 {
+    margin: 2px;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    text-shadow: 5px 0 #232931;
+    font-size: 6rem;
+    color: #4ECCA3;
+}
+
+p {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #4ECCA3;
+    font-family: 'Indie Flower', cursive;
+    margin: 2px;
+}
+
+.you {
+    color: red;
 
 }
 
-.btn {
-  margin: 25px;
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-  border: 10px solid black;
-  border-radius: 20%;
+.computer {
+    color: yellow;
+
 }
 
-.game-over {
-  background-color: red;
-  opacity: 0.8;
+.header {
+    background-color: teal;
+    color: white;
 }
 
-.red {
-  background-color: red;
-}
-
-.green {
-  background-color: green;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.pressed {
-  box-shadow: 0 0 20px white;
-  background-color: grey;
-}
