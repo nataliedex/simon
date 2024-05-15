@@ -4,7 +4,7 @@ var started = false;
 var gamePattern = [];
 var userClickedPattern = [];
 
-$(document).on("keydown",function(event){
+$(document).on("click",function(event){
     if(!started){
         
         $("h1").text("Level " + level);
